@@ -1,0 +1,57 @@
+项目名称:学校疫情上报系统
+
+测试环境要求：
+	系统:windows10
+	前端：
+		1.安装nodejs  
+	后端：
+		1.jdk1.8
+		2.redis
+			也可以不启用 
+			安装目录已经打包在项目 \学生疫情申报系统后端\resdis\Redis-x64-3.2.100目录下)
+	
+		
+		
+项目启动前需要的准备工作：
+	前端：使用vue安装必要的插件后run npm dev
+	后端：
+		1.还原mysql数据库（sql文件命名为httprequest）
+			这里推荐使用navcat连接mysql数据库经行还原
+		
+		2.修改jar包的数据库配置文件
+			使用360解压工具，右键点击HttpReceive-1.0-SNAPSHOT.jar文件
+			点击360压缩\使用360压缩打开，找到spring-dao.xml文件打开修改一下配置
+			以下就是正常的数据库源的配置，不再赘述
+			
+			<bean id="mysqlDataSource"
+				  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+				<property name="driverClassName">
+					<value>com.mysql.jdbc.Driver</value>
+				</property>
+				<property name="url">
+					<value>jdbc:mysql://localhost:3306/httprequest</value>
+				</property>
+				<property name="username">
+					<value>root</value>
+				</property>
+				<property name="password">
+					<value>这里替换为密码</value>
+				</property>
+			</bean>
+			
+			
+		3.启动redis服务器。
+			redis解压文件在 学生疫情申报系统后端\resdis\Redis-x64-3.2.100目录下，
+			双击启动redis-server.exe即可（默认端口6379）
+		4.启动后端服务器方式
+			（1）生产环境启动方式
+				双击 学生疫情申报系统后端目录下的startup.bat即可。
+				若没有启动reids服务器，会报错，但是可以正常运行，运行速度可能会很慢。
+				正常启动后端服务器后会显示，初次使用会有2s左右的延迟卡顿，属于正常现象
+					
+					SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+					SLF4J: Defaulting to no-operation (NOP) logger implementation
+					SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+					信息|2021-09-21 11:00:55=:shardedJedis初始化参数读取成功
+					信息|2021-09-21 11:00:55=:127.0.0.1 : 6379    redis服务器读取并且初始化
+					信息|2021-09-21 11:00:57=:8888端口服务启动成功

@@ -1,0 +1,11 @@
+CREATE VIEW reportclassuserbaseinfo AS
+SELECT login.uname id,userbase.name,userbase.birthday,userbase.email,userbase.phone,
+userbase.sex,userbase.idCardNumber,login.type,class_user.classId,reportDate,realReportDate,
+bodyTemperature,isConfirm,isArea,address 
+FROM login LEFT JOIN class_user ON login.uname=class_user.userId 
+LEFT JOIN userbase ON login.uname=userbase.id 
+LEFT JOIN reportinfo ON reportinfo.uameId= login.uname WHERE login.type!='admin'
+
+
+CREATE VIEW adminForStudentInfo AS
+SELECT  id,name,phone,sex,type, MAX(reportDate) reportDate FROM reportclassuserbaseinfo WHERE type='student' GROUP BY id
